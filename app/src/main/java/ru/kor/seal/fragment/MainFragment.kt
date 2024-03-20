@@ -12,7 +12,9 @@ import com.google.android.material.divider.MaterialDividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import ru.kor.seal.R
 import ru.kor.seal.adapter.ObjectiveAdapter
+import ru.kor.seal.adapter.OnInteractionClickListener
 import ru.kor.seal.databinding.FragmentMainBinding
+import ru.kor.seal.dto.Objective
 import ru.kor.seal.viewmodel.ObjectiveViewModel
 
 @AndroidEntryPoint
@@ -26,7 +28,17 @@ class MainFragment : Fragment() {
     ): View {
         val binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        val adapter = ObjectiveAdapter()
+        val adapter = ObjectiveAdapter(object : OnInteractionClickListener {
+            override fun removeObjective(objective: Objective) {
+                viewModel.removeObjective(objective)
+            }
+
+            override fun openCard(objective: Objective) {
+                viewModel.setOpenObjective(objective)
+                findNavController().navigate(R.id.action_mainFragment_to_detailObjectiveFragment)
+            }
+        })
+
         binding.recyclerView.apply {
             addItemDecoration(
                 MaterialDividerItemDecoration(
@@ -40,7 +52,14 @@ class MainFragment : Fragment() {
 
 
         viewModel.dataObjectives.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            val newItem = it.size > adapter.currentList.size
+
+            adapter.submitList(it) {
+                if (newItem) {
+                    binding.recyclerView.smoothScrollToPosition(0)
+                }
+            }
+
         }
 
         binding.fab.setOnClickListener {

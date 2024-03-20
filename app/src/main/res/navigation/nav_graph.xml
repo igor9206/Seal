@@ -15,10 +15,20 @@
             app:destination="@id/newObjectiveFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailObjectiveFragment"
+            app:destination="@id/detailObjectiveFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/newObjectiveFragment"
         android:name="ru.kor.seal.fragment.newitem.NewObjectiveFragment"
         android:label="fragment_new_objective"
         tools:layout="@layout/fragment_new_objective" />
+    <fragment
+        android:id="@+id/detailObjectiveFragment"
+        android:name="ru.kor.seal.fragment.detailitem.DetailObjectiveFragment"
+        android:label="fragment_detail_objective"
+        tools:layout="@layout/fragment_detail_objective" />
 </navigation>

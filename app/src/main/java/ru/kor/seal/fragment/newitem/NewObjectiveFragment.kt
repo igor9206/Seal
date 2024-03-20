@@ -1,15 +1,16 @@
 package ru.kor.seal.fragment.newitem
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.kor.seal.R
 import ru.kor.seal.databinding.FragmentNewObjectiveBinding
+
 import ru.kor.seal.viewmodel.ObjectiveViewModel
 
 @AndroidEntryPoint

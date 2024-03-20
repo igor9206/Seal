@@ -7,4 +7,5 @@ interface Repository {
     val data: LiveData<List<Objective>>
 
     suspend fun saveObjective(objective: Objective)
+    suspend fun removeObjective(objective: Objective)
 }

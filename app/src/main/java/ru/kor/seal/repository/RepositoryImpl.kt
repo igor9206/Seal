@@ -21,4 +21,8 @@ class RepositoryImpl @Inject constructor(
         objectiveDao.insert(objective.toEntity())
     }
 
+    override suspend fun removeObjective(objective: Objective) {
+        objectiveDao.removeById(objective.toEntity())
+    }
+
 }
