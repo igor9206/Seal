@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.kor.seal.dao.ObjectiveDao
+import ru.kor.seal.dao.StageDao
 import javax.inject.Singleton
 
 @Module
@@ -26,7 +27,8 @@ object DbModule {
     ).build()
 
     @Provides
-    fun provideObjectiveDao(
-        appDb: AppDb
-    ): ObjectiveDao = appDb.objectiveDao()
+    fun provideObjectiveDao(appDb: AppDb): ObjectiveDao = appDb.objectiveDao()
+
+    @Provides
+    fun provideStageDao(appDb: AppDb): StageDao = appDb.stageDao()
 }
