@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -23,25 +24,26 @@ class DetailObjectiveFragment : Fragment() {
     ): View {
         val binding = FragmentDetailObjectiveBinding.inflate(inflater, container, false)
 
-        viewModel.dataOpenObjective.observe(viewLifecycleOwner) { objective ->
+        viewModel.data.observe(viewLifecycleOwner) { objectives ->
+            val objective =
+                objectives.find { it.objective.id == viewModel.dataOpenObjective.value?.objective?.id }
+
             if (objective != null) {
-                viewModel.getStage(objective.id)
                 with(binding) {
-                    tvName.text = objective.name
-                    tvDescription.text = objective.description
-                }
-            }
+                    tvName.text = objective.objective.name
+                    tvDescription.text = objective.objective.description
 
-        }
+                    binding.taskContainer.removeAllViews()
+                    binding.cardStage.isVisible = objective.stages.isNotEmpty()
+                    binding.stageTitle.isVisible = objective.stages.isNotEmpty()
+                    binding.stageEmpty.isVisible = objective.stages.isEmpty()
 
-        viewModel.dataStage.observe(viewLifecycleOwner) { stages ->
-            binding.taskContainer.removeAllViews()
-            if (stages.isNotEmpty()) {
-                stages.forEach { stage ->
-                    CardStageBinding.inflate(inflater, binding.taskContainer, true).apply {
-                        radioButton.isChecked = stage.finished
-                        content.text = stage.text
-                    }.root
+                    objective.stages.forEach { stage ->
+                        CardStageBinding.inflate(inflater, binding.taskContainer, true).apply {
+                            radioButton.isChecked = stage.finished
+                            content.text = stage.text
+                        }.root
+                    }
                 }
             }
         }

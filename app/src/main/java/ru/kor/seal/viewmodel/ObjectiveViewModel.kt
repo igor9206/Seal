@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.kor.seal.dto.Objective
 import ru.kor.seal.dto.Stage
+import ru.kor.seal.model.ObjectiveModel
 import ru.kor.seal.repository.RepositoryImpl
 import javax.inject.Inject
 
@@ -16,12 +17,11 @@ class ObjectiveViewModel @Inject constructor(
     private val repository: RepositoryImpl
 ) : ViewModel() {
 
-    val dataObjectives = repository.dataObjective
+    val data = repository.data
 
-    private var _dataOpenObjective = MutableLiveData<Objective?>()
-    val dataOpenObjective: LiveData<Objective?> = _dataOpenObjective
+    private var _dataOpenObjective = MutableLiveData<ObjectiveModel?>()
+    val dataOpenObjective: LiveData<ObjectiveModel?> = _dataOpenObjective
 
-    val dataStage: LiveData<List<Stage>> = repository.dataStage
 
     fun saveObjective(name: String, description: String) {
         viewModelScope.launch {
@@ -32,10 +32,11 @@ class ObjectiveViewModel @Inject constructor(
     fun removeObjective(objective: Objective) {
         viewModelScope.launch {
             repository.removeObjective(objective)
+            repository.removeStageByObjectiveId(objective.id)
         }
     }
 
-    fun setOpenObjective(objective: Objective) {
+    fun setOpenObjective(objective: ObjectiveModel) {
         _dataOpenObjective.value = objective
     }
 
@@ -43,18 +44,12 @@ class ObjectiveViewModel @Inject constructor(
         _dataOpenObjective.value = null
     }
 
-    fun getStage(id: Long) {
-        viewModelScope.launch {
-            repository.getStage(id)
-        }
-    }
-
     fun saveStage(text: String) {
         viewModelScope.launch {
             repository.saveStage(
                 Stage(
                     id = 0,
-                    objectiveId = dataOpenObjective.value!!.id,
+                    objectiveId = dataOpenObjective.value!!.objective.id,
                     text = text
                 )
             )

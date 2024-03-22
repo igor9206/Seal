@@ -9,17 +9,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.kor.seal.R
 import ru.kor.seal.databinding.CardObjectiveBinding
-import ru.kor.seal.dto.Objective
+import ru.kor.seal.model.ObjectiveModel
 
 
 interface OnInteractionClickListener {
-    fun removeObjective(objective: Objective)
-    fun openCard(objective: Objective)
+    fun removeObjective(objective: ObjectiveModel)
+    fun openCard(objective: ObjectiveModel)
 }
 
 class ObjectiveAdapter(
     private val onInteractionClickListener: OnInteractionClickListener
-) : ListAdapter<Objective, ObjectiveVH>(ItemCB()) {
+) : ListAdapter<ObjectiveModel, ObjectiveVH>(ItemCB()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObjectiveVH {
         val binding =
@@ -38,10 +38,10 @@ class ObjectiveVH(
     private val binding: CardObjectiveBinding,
     private val onInteractionClickListener: OnInteractionClickListener
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(objective: Objective) {
+    fun bind(objective: ObjectiveModel) {
         with(binding) {
-            name.text = objective.name
-            description.text = objective.description
+            name.text = objective.objective.name
+            description.text = objective.objective.description
 
             cardObjective.setOnClickListener {
                 onInteractionClickListener.openCard(objective)
@@ -68,12 +68,12 @@ class ObjectiveVH(
 }
 
 
-class ItemCB : DiffUtil.ItemCallback<Objective>() {
-    override fun areItemsTheSame(oldItem: Objective, newItem: Objective): Boolean {
-        return oldItem.id == newItem.id
+class ItemCB : DiffUtil.ItemCallback<ObjectiveModel>() {
+    override fun areItemsTheSame(oldItem: ObjectiveModel, newItem: ObjectiveModel): Boolean {
+        return oldItem.objective.id == newItem.objective.id
     }
 
-    override fun areContentsTheSame(oldItem: Objective, newItem: Objective): Boolean {
+    override fun areContentsTheSame(oldItem: ObjectiveModel, newItem: ObjectiveModel): Boolean {
         return oldItem == newItem
     }
 
