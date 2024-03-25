@@ -13,8 +13,9 @@ import ru.kor.seal.model.ObjectiveModel
 
 
 interface OnInteractionClickListener {
-    fun removeObjective(objective: ObjectiveModel)
-    fun openCard(objective: ObjectiveModel)
+    fun removeObjective(objectiveModel: ObjectiveModel)
+    fun editObjective(objectiveModel: ObjectiveModel)
+    fun openCard(objectiveModel: ObjectiveModel)
 }
 
 class ObjectiveAdapter(
@@ -54,6 +55,11 @@ class ObjectiveVH(
                         when (menu.itemId) {
                             R.id.delete -> {
                                 onInteractionClickListener.removeObjective(objective)
+                                true
+                            }
+
+                            R.id.edit -> {
+                                onInteractionClickListener.editObjective(objective)
                                 true
                             }
 

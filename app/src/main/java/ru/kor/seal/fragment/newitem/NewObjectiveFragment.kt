@@ -29,6 +29,13 @@ class NewObjectiveFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        viewModel.dataEditObjective.observe(viewLifecycleOwner) { objective ->
+            if (objective != null) {
+                binding.name.editText?.setText(objective.name)
+                binding.description.editText?.setText(objective.description)
+            }
+        }
+
         binding.topAppBar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.save -> {

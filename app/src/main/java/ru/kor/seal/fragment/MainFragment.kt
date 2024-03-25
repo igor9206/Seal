@@ -30,8 +30,13 @@ class MainFragment : Fragment() {
         val binding = FragmentMainBinding.inflate(inflater, container, false)
 
         val adapter = ObjectiveAdapter(object : OnInteractionClickListener {
-            override fun removeObjective(objective: ObjectiveModel) {
-                viewModel.removeObjective(objective.objective)
+            override fun removeObjective(objectiveModel: ObjectiveModel) {
+                viewModel.removeObjective(objectiveModel.objective)
+            }
+
+            override fun editObjective(objectiveModel: ObjectiveModel) {
+                viewModel.setEditObjective(objectiveModel.objective)
+                findNavController().navigate(R.id.action_mainFragment_to_newObjectiveFragment)
             }
 
             override fun openCard(objective: ObjectiveModel) {

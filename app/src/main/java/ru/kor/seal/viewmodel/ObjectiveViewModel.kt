@@ -12,6 +12,8 @@ import ru.kor.seal.model.ObjectiveModel
 import ru.kor.seal.repository.RepositoryImpl
 import javax.inject.Inject
 
+val emptyObjective = Objective(0, "", "")
+
 @HiltViewModel
 class ObjectiveViewModel @Inject constructor(
     private val repository: RepositoryImpl
@@ -22,10 +24,19 @@ class ObjectiveViewModel @Inject constructor(
     private var _dataOpenObjective = MutableLiveData<ObjectiveModel?>()
     val dataOpenObjective: LiveData<ObjectiveModel?> = _dataOpenObjective
 
+    private var _dataEditObjective = MutableLiveData(emptyObjective)
+    val dataEditObjective: LiveData<Objective> = _dataEditObjective
 
     fun saveObjective(name: String, description: String) {
         viewModelScope.launch {
-            repository.saveObjective(Objective(0, name, description))
+            if (dataEditObjective.value?.id == 0L) {
+                repository.saveObjective(Objective(0, name, description))
+            } else {
+                dataEditObjective.value?.let {
+                    repository.saveObjective(it.copy(name = name, description = description))
+                }
+            }
+
         }
     }
 
@@ -38,6 +49,10 @@ class ObjectiveViewModel @Inject constructor(
 
     fun setOpenObjective(objective: ObjectiveModel) {
         _dataOpenObjective.value = objective
+    }
+
+    fun setEditObjective(objective: Objective) {
+        _dataEditObjective.value = objective
     }
 
     fun resetOpenObjective() {

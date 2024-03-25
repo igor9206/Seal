@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import ru.kor.seal.R
 import ru.kor.seal.databinding.CardStageBinding
 import ru.kor.seal.databinding.FragmentDetailObjectiveBinding
 import ru.kor.seal.fragment.newitem.NewStageDialogFragment
@@ -56,6 +57,19 @@ class DetailObjectiveFragment : Fragment() {
 
                         }.root
                     }
+
+                    binding.topAppBar.setOnMenuItemClickListener {
+                        when (it.itemId) {
+                            R.id.editObjective -> {
+                                viewModel.setEditObjective(objective.objective)
+                                findNavController().navigate(R.id.newObjectiveFragment)
+                                true
+                            }
+
+                            else -> false
+                        }
+                    }
+
                 }
             }
         }
