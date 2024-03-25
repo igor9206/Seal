@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import ru.kor.seal.R
 import ru.kor.seal.databinding.FragmentNewObjectiveBinding
@@ -40,6 +41,15 @@ class NewObjectiveFragment : Fragment() {
                 }
 
                 else -> false
+            }
+        }
+
+        val datePicker = MaterialDatePicker.Builder.datePicker().build()
+
+        binding.date.setOnFocusChangeListener { v, hasFocus ->
+            println(hasFocus)
+            if (hasFocus){
+                datePicker.show(childFragmentManager, "date")
             }
         }
 
