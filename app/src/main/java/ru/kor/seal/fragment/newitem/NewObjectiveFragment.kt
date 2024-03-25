@@ -44,15 +44,6 @@ class NewObjectiveFragment : Fragment() {
             }
         }
 
-        val datePicker = MaterialDatePicker.Builder.datePicker().build()
-
-        binding.date.setOnFocusChangeListener { v, hasFocus ->
-            println(hasFocus)
-            if (hasFocus){
-                datePicker.show(childFragmentManager, "date")
-            }
-        }
-
         return binding.root
     }
 

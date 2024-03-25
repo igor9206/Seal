@@ -56,4 +56,16 @@ class ObjectiveViewModel @Inject constructor(
         }
     }
 
+    fun setFinishedStage(stage: Stage) {
+        viewModelScope.launch {
+            repository.setFinishedStage(stage)
+        }
+    }
+
+    fun removeStage(stage: Stage) {
+        viewModelScope.launch {
+            repository.removeStage(stage)
+        }
+    }
+
 }

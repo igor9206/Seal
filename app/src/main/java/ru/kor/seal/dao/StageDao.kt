@@ -3,6 +3,7 @@ package ru.kor.seal.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import ru.kor.seal.entity.StageEntity
 
@@ -12,7 +13,7 @@ interface StageDao {
     @Query("SELECT * FROM StageEntity WHERE objectiveId = :id ORDER BY id ASC")
     suspend fun getById(id: Long): List<StageEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(stageEntity: StageEntity)
 
     @Delete

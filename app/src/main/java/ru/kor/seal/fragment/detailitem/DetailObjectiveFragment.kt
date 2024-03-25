@@ -1,5 +1,6 @@
 package ru.kor.seal.fragment.detailitem
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,8 +41,19 @@ class DetailObjectiveFragment : Fragment() {
 
                     objective.stages.forEach { stage ->
                         CardStageBinding.inflate(inflater, binding.taskContainer, true).apply {
-                            radioButton.isChecked = stage.finished
+                            checkBox.isChecked = stage.finished
                             content.text = stage.text
+                            content.paintFlags =
+                                if (stage.finished) Paint.STRIKE_THRU_TEXT_FLAG else Paint.ANTI_ALIAS_FLAG
+
+                            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                                viewModel.setFinishedStage(stage.copy(finished = isChecked))
+                            }
+
+                            removeStage.setOnClickListener {
+                                viewModel.removeStage(stage)
+                            }
+
                         }.root
                     }
                 }

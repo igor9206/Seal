@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import ru.kor.seal.entity.ObjectiveEntity
@@ -18,7 +19,7 @@ interface ObjectiveDao {
     @Query("SELECT * FROM ObjectiveEntity ORDER BY id DESC")
     fun getAll(): LiveData<List<ObjectiveEntity>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(objectiveEntity: ObjectiveEntity)
 
     @Delete

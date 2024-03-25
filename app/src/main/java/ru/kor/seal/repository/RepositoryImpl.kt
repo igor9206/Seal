@@ -44,4 +44,12 @@ class RepositoryImpl @Inject constructor(
         stageDao.removeByObjectiveId(id)
     }
 
+    override suspend fun removeStage(stage: Stage) {
+        stageDao.remove(stage.toEntity())
+    }
+
+    override suspend fun setFinishedStage(stage: Stage) {
+        stageDao.insert(stage.toEntity())
+    }
+
 }

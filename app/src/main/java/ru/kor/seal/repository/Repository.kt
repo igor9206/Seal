@@ -12,4 +12,6 @@ interface Repository {
     suspend fun removeObjective(objective: Objective)
     suspend fun saveStage(stage: Stage)
     suspend fun removeStageByObjectiveId(id: Long)
+    suspend fun removeStage(stage: Stage)
+    suspend fun setFinishedStage(stage: Stage)
 }
