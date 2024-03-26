@@ -21,13 +21,13 @@ class NewStageDialogFragment(
         val t = layout.findViewById<EditText>(R.id.nameStage)
 
         val dialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle("New Stage")
+            .setTitle(getString(R.string.new_stage))
             .setView(layout)
-            .setPositiveButton("Ok") { _, _ ->
+            .setPositiveButton(getString(R.string.ok)) { _, _ ->
                 listener.onDialogPositiveClick(t.text.toString().trim())
                 dismiss()
             }
-            .setNegativeButton("Cancel") { _, _ ->
+            .setNegativeButton(getString(R.string.cancel)) { _, _ ->
                 dismiss()
             }
             .create()
