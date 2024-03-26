@@ -8,8 +8,10 @@
         android:id="@+id/nameStage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
-        android:hint="@string/name_stage" />
+        android:layout_marginTop="16dp"
+        android:autofillHints="name"
+        android:hint="@string/name_stage"
+        android:inputType="textMultiLine" />
 
 </FrameLayout>

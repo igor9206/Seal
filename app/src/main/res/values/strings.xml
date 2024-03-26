@@ -12,6 +12,8 @@
     <string name="edit_objective">Edit objective</string>
     <string name="new_objective">New objective</string>
     <string name="new_stage">New stage</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="add_objective">add objective</string>
+    <string name="add_stage">add stage</string>
 </resources>
