@@ -16,8 +16,6 @@ data class ObjectiveEntityModel(
     val stages: List<StageEntity>
 )
 
-//fun ObjectiveEntity.toDto(): Objective = Objective(id, name, description)
-//
 fun List<StageEntity>.toDto(): List<Stage> = map {
     it.toDto()
 }

@@ -20,7 +20,7 @@
             android:minHeight="?attr/actionBarSize"
             app:menu="@menu/new_objective_menu"
             app:navigationIcon="@drawable/ic_arrow_back_24"
-            app:title="Objective" />
+            tools:title="New objective" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:hint="name">
+                android:hint="@string/name">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:hint="Description">
+                android:hint="@string/description">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

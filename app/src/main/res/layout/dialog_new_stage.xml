@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
-        android:hint="name stage" />
+        android:hint="@string/name_stage" />
 
 </FrameLayout>

@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import ru.kor.seal.R
 import ru.kor.seal.databinding.FragmentNewObjectiveBinding
-
 import ru.kor.seal.viewmodel.ObjectiveViewModel
 
 @AndroidEntryPoint
@@ -30,9 +28,12 @@ class NewObjectiveFragment : Fragment() {
         }
 
         viewModel.dataEditObjective.observe(viewLifecycleOwner) { objective ->
-            if (objective != null) {
+            if (objective.id != 0L) {
                 binding.name.editText?.setText(objective.name)
                 binding.description.editText?.setText(objective.description)
+                binding.topAppBar.title = getString(R.string.edit_objective)
+            } else {
+                binding.topAppBar.title = getString(R.string.new_objective)
             }
         }
 
@@ -52,6 +53,11 @@ class NewObjectiveFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroy() {
+        viewModel.resetEditObjective()
+        super.onDestroy()
     }
 
 }

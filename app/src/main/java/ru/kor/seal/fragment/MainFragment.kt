@@ -39,8 +39,8 @@ class MainFragment : Fragment() {
                 findNavController().navigate(R.id.action_mainFragment_to_newObjectiveFragment)
             }
 
-            override fun openCard(objective: ObjectiveModel) {
-                viewModel.setOpenObjective(objective)
+            override fun openCard(objectiveModel: ObjectiveModel) {
+                viewModel.setOpenObjective(objectiveModel)
                 findNavController().navigate(R.id.action_mainFragment_to_detailObjectiveFragment)
             }
         })

@@ -36,7 +36,7 @@ class ObjectiveViewModel @Inject constructor(
                     repository.saveObjective(it.copy(name = name, description = description))
                 }
             }
-
+            _dataEditObjective.value = emptyObjective
         }
     }
 
@@ -81,6 +81,10 @@ class ObjectiveViewModel @Inject constructor(
         viewModelScope.launch {
             repository.removeStage(stage)
         }
+    }
+
+    fun resetEditObjective() {
+        _dataEditObjective.value = emptyObjective
     }
 
 }

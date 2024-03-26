@@ -3,4 +3,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="save">save</string>
     <string name="delete">delete</string>
+    <string name="name_stage">name stage</string>
+    <string name="no_stages">No stages</string>
+    <string name="stages">Stages</string>
+    <string name="no_objectives">No objectives</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="edit_objective">Edit objective</string>
+    <string name="new_objective">New objective</string>
+    <string name="new_stage">New stage</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 </resources>
